@@ -41,7 +41,7 @@ function setupEventListeners() {
   document.getElementById('btn-export').addEventListener('click', showExportModal);
 
   // Clear all
-  document.getElementById('btn-clear-all').addEventListener('click', clearAllData);
+  document.getElementById('btn-clear-all').addEventListener('click', handleClearAllData);
 
   // Card actions
   document.addEventListener('click', handleCardAction);
@@ -54,9 +54,6 @@ function setupEventListeners() {
   document.querySelectorAll('.modal-overlay').forEach(overlay => {
     overlay.addEventListener('click', closeAllModals);
   });
-
-  // Empty state button
-  document.getElementById('btn-try-now').addEventListener('click', closeAllModals);
 
   // Populate status filter
   populateStatusFilter();
@@ -156,9 +153,7 @@ function createApplicationCard(app) {
       ${notesHTML}
     </div>
     <div class="app-card-footer">
-      <button class="app-card-btn btn-view-job" data-app-id="${app.id}">
-        <a href="${app.url}" target="_blank" style="color: inherit;">View Job</a>
-      </button>
+      <button class="app-card-btn btn-view-job" data-app-id="${app.id}" data-url="${app.url}">View Job</button>
       <button class="app-card-btn btn-edit" data-app-id="${app.id}">Edit</button>
       <button class="app-card-btn app-card-btn-danger btn-delete" data-app-id="${app.id}">Delete</button>
     </div>
@@ -169,6 +164,17 @@ function createApplicationCard(app) {
 
 // Handle card action clicks
 function handleCardAction(e) {
+  // View Job button
+  const viewBtn = e.target.closest('.btn-view-job');
+  if (viewBtn) {
+    const url = viewBtn.dataset.url;
+    if (url) {
+      chrome.tabs.create({ url: url });
+    }
+    return;
+  }
+
+  // Edit button
   const editBtn = e.target.closest('.btn-edit');
   if (editBtn) {
     const appId = editBtn.dataset.appId;
@@ -176,6 +182,7 @@ function handleCardAction(e) {
     return;
   }
 
+  // Delete button
   const deleteBtn = e.target.closest('.btn-delete');
   if (deleteBtn) {
     const appId = deleteBtn.dataset.appId;
@@ -453,7 +460,7 @@ function getDateForFile() {
 }
 
 // Clear all data
-async function clearAllData() {
+async function handleClearAllData() {
   if (!confirm('Are you sure you want to delete ALL applications? This cannot be undone.')) {
     return;
   }
@@ -463,10 +470,17 @@ async function clearAllData() {
   }
 
   try {
+    // Call the storage function from storage.js
     await clearAllData();
-    allApplications = [];
-    displayedApplications = [];
+
+    // Reload from storage to ensure sync (will be empty now)
+    await loadApplications();
+
+    // Re-render the dashboard to show empty state
     await renderDashboard();
+
+    // Show success message
+    alert('All applications have been deleted successfully.');
   } catch (error) {
     alert('Error clearing data: ' + error.message);
   }
