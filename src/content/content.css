@@ -1,0 +1,225 @@
+/* Job Tracker Overlay Styles */
+
+.job-tracker-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999999;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  animation: slideDown 0.3s ease-out;
+}
+
+.job-tracker-overlay.hidden {
+  display: none;
+}
+
+.job-tracker-overlay-bottom {
+  top: auto;
+  bottom: 0;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.job-tracker-overlay-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.job-tracker-overlay-icon {
+  font-size: 24px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.job-tracker-overlay-text {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.job-tracker-overlay-text strong {
+  font-weight: 600;
+  display: block;
+  width: 100%;
+}
+
+.job-tracker-overlay-text span {
+  font-size: 14px;
+  opacity: 0.95;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.status-applied {
+  background-color: rgba(102, 126, 234, 0.3);
+}
+
+.status-screening {
+  background-color: rgba(255, 193, 7, 0.3);
+}
+
+.status-interviewing {
+  background-color: rgba(76, 175, 80, 0.3);
+}
+
+.status-offer {
+  background-color: rgba(33, 150, 243, 0.3);
+}
+
+.status-rejected {
+  background-color: rgba(244, 67, 54, 0.3);
+}
+
+.status-accepted {
+  background-color: rgba(76, 175, 80, 0.4);
+}
+
+.status-declined {
+  background-color: rgba(244, 67, 54, 0.4);
+}
+
+.status-ghosted {
+  background-color: rgba(158, 158, 158, 0.3);
+}
+
+.job-tracker-overlay-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.job-tracker-btn {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.job-tracker-btn:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
+}
+
+.job-tracker-btn-close {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+  font-weight: 300;
+  line-height: 1;
+}
+
+.job-tracker-btn-close:hover {
+  opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .job-tracker-overlay {
+    padding: 10px 15px;
+  }
+
+  .job-tracker-overlay-content {
+    gap: 12px;
+  }
+
+  .job-tracker-overlay-text {
+    font-size: 14px;
+  }
+
+  .job-tracker-btn {
+    padding: 5px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .job-tracker-overlay {
+    padding: 8px 12px;
+  }
+
+  .job-tracker-overlay-icon {
+    font-size: 20px;
+  }
+
+  .job-tracker-overlay-content {
+    gap: 8px;
+  }
+
+  .job-tracker-overlay-text span {
+    font-size: 13px;
+  }
+
+  .job-tracker-btn {
+    padding: 4px 10px;
+    font-size: 11px;
+  }
+}
+
+/* Ensure overlay doesn't break page layout */
+.job-tracker-overlay + * {
+  margin-top: 0;
+}
+
+/* Print styles */
+@media print {
+  .job-tracker-overlay {
+    display: none !important;
+  }
+}

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
+  <defs>
+    <style>
+      .bg { fill: #667eea; }
+      .checkmark { fill: #ffffff; }
+    </style>
+  </defs>
+  <rect class="bg" width="128" height="128" rx="28"/>
+  <path class="checkmark" d="M30 64 L50 84 L98 36 L88 26 L50 64 L40 54 Z"/>
+</svg>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobMemory - Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="dashboard-header">
+      <div class="header-content">
+        <h1>JobMemory</h1>
+        <p class="subtitle">Never forget where you applied</p>
+        <p class="header-credit">by <a href="https://github.com/ajinkyawakhale" target="_blank">Ajinkya Wakhale</a></p>
+      </div>
+      <div class="header-actions">
+        <button id="btn-export" class="btn btn-secondary btn-icon">
+          <span class="icon">⬇</span> Export
+        </button>
+        <button id="btn-clear-all" class="btn btn-danger btn-small" title="Clear all data">
+          Clear All
+        </button>
+      </div>
+    </header>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+      <div class="stat-card">
+        <div class="stat-value" id="stat-total">0</div>
+        <div class="stat-label">Total Applications</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-interviewing">0</div>
+        <div class="stat-label">Interviewing</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-offers">0</div>
+        <div class="stat-label">Offers</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value" id="stat-week">0</div>
+        <div class="stat-label">This Week</div>
+      </div>
+    </section>
+
+    <!-- Controls Section -->
+    <section class="controls-section">
+      <div class="search-bar">
+        <input type="text" id="search-input" class="search-input" placeholder="Search jobs, companies, notes...">
+        <span class="search-icon">🔍</span>
+      </div>
+
+      <div class="filters-group">
+        <select id="filter-status" class="filter-select">
+          <option value="">All Statuses</option>
+        </select>
+
+        <select id="filter-date" class="filter-select">
+          <option value="">All Time</option>
+          <option value="today">Today</option>
+          <option value="week">This Week</option>
+          <option value="month">This Month</option>
+        </select>
+
+        <select id="sort-by" class="filter-select">
+          <option value="dateDesc">Date Applied (Newest)</option>
+          <option value="dateAsc">Date Applied (Oldest)</option>
+          <option value="titleAsc">Job Title (A-Z)</option>
+          <option value="companyAsc">Company (A-Z)</option>
+        </select>
+
+        <button id="btn-reset-filters" class="btn btn-secondary btn-small">
+          Reset
+        </button>
+      </div>
+    </section>
+
+    <!-- Applications Section -->
+    <section class="applications-section">
+      <div id="applications-container" class="applications-container"></div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="empty-state hidden">
+        <div class="empty-icon">📭</div>
+        <h2>No Applications Yet</h2>
+        <p>Start tracking your job applications by visiting a job posting and clicking the extension icon.</p>
+        <button id="btn-try-now" class="btn btn-primary">Got it!</button>
+      </div>
+
+      <!-- Loading State -->
+      <div id="loading-state" class="loading-state hidden">
+        <div class="spinner"></div>
+        <p>Loading applications...</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- Edit Modal -->
+  <div id="edit-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Edit Application</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <!-- Form will be populated by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Export Modal -->
+  <div id="export-modal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>Export Applications</h2>
+        <button class="modal-close">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Choose a format to export your job applications:</p>
+        <div class="export-options">
+          <button id="export-json" class="btn btn-primary">Export as JSON</button>
+          <button id="export-csv" class="btn btn-primary">Export as CSV</button>
+        </div>
+        <label class="export-filter-label">
+          <input type="checkbox" id="export-filtered" checked>
+          Export only visible applications
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../shared/constants.js"></script>
+  <script src="../shared/utils.js"></script>
+  <script src="../shared/storage.js"></script>
+  <script src="../shared/scraper.js"></script>
+  <script src="../export/exporter.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>

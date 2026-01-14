@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobMemory</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <!-- Loading State -->
+  <div id="loading-state" class="state">
+    <div class="spinner"></div>
+    <p>Checking current page...</p>
+  </div>
+
+  <!-- Existing Application State -->
+  <div id="existing-state" class="state hidden">
+    <div class="popup-header">
+      <h2>Application Tracked</h2>
+      <span id="status-badge" class="status-badge"></span>
+    </div>
+
+    <div class="popup-details">
+      <div class="detail-field">
+        <label>Job Title:</label>
+        <div id="existing-title" class="detail-value"></div>
+      </div>
+
+      <div class="detail-field">
+        <label>Company:</label>
+        <div id="existing-company" class="detail-value"></div>
+      </div>
+
+      <div class="detail-field">
+        <label>Location:</label>
+        <div id="existing-location" class="detail-value"></div>
+      </div>
+
+      <div class="detail-field">
+        <label>Applied On:</label>
+        <div id="existing-date" class="detail-value"></div>
+      </div>
+
+      <div class="detail-field">
+        <label>Status:</label>
+        <select id="existing-status" class="field-input"></select>
+      </div>
+
+      <div class="detail-field">
+        <label>Notes:</label>
+        <textarea id="existing-notes" class="field-input" rows="3" placeholder="Add notes about this application..."></textarea>
+      </div>
+    </div>
+
+    <div class="popup-actions">
+      <button id="btn-save-existing" class="btn btn-primary">Save Changes</button>
+      <button id="btn-delete" class="btn btn-danger">Delete</button>
+      <button id="btn-view-job" class="btn btn-secondary">View Job</button>
+    </div>
+  </div>
+
+  <!-- New Application State -->
+  <div id="new-state" class="state hidden">
+    <div class="popup-header">
+      <h2>Track This Application</h2>
+    </div>
+
+    <form id="new-app-form" class="popup-form">
+      <div class="form-field">
+        <label for="new-title">Job Title <span class="required">*</span></label>
+        <input type="text" id="new-title" class="field-input" required placeholder="e.g., Senior Software Engineer">
+      </div>
+
+      <div class="form-field">
+        <label for="new-company">Company</label>
+        <input type="text" id="new-company" class="field-input" placeholder="e.g., Google">
+      </div>
+
+      <div class="form-field">
+        <label for="new-location">Location</label>
+        <input type="text" id="new-location" class="field-input" placeholder="e.g., San Francisco, CA">
+      </div>
+
+      <div class="form-field">
+        <label for="new-status">Status</label>
+        <select id="new-status" class="field-input"></select>
+      </div>
+
+      <div class="form-field">
+        <label for="new-notes">Notes</label>
+        <textarea id="new-notes" class="field-input" rows="3" placeholder="Add notes about this application..."></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-full">Save Application</button>
+    </form>
+  </div>
+
+  <!-- Empty/Error State -->
+  <div id="error-state" class="state hidden">
+    <div class="error-icon">⚠</div>
+    <h3>Unable to check page</h3>
+    <p id="error-message">Please refresh the page and try again.</p>
+    <button id="btn-retry" class="btn btn-secondary">Retry</button>
+  </div>
+
+  <!-- Footer -->
+  <div class="popup-footer">
+    <a href="#" id="btn-dashboard" class="footer-link">
+      View All Applications →
+    </a>
+    <div class="footer-credit">
+      by <a href="https://github.com/ajinkyawakhale" target="_blank" class="credit-link">Ajinkya Wakhale</a>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../shared/constants.js"></script>
+  <script src="../shared/utils.js"></script>
+  <script src="../shared/storage.js"></script>
+  <script src="../shared/scraper.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
